@@ -33,8 +33,8 @@ package _00_Binary_Conversion;
  *       11111111   //   -1 decimal (largest negative value)
  *       10000000   // -128 decimal (smallest negative value)
  * 
- * Converting a number from non-negative to negative and negative to
- * non-negative is the same process.
+ * Converting a number from positive to negative and negative to
+ * positive is the same process.
  *      1. Invert all the bits
  *      2. Add 1
  * For example,
