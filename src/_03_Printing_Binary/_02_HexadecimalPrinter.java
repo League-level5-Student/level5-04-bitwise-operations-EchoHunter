@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -53,25 +54,53 @@ public class _02_HexadecimalPrinter implements ActionListener {
      */
     String binaryToHex(String binaryStr) {
        String hexReturn = "";
-    	for (int i = 0; i < binaryStr.length()/4; i++) {
-			
+       String binSub ="";
+    	for (int i = 0; i < binaryStr.length(); i+= 4) {
+			binSub = binaryStr.substring(i, i+4);
+			if(Integer.parseInt(binSub,2) < 10) {
+				hexReturn = hexReturn + Integer.parseInt(binSub,2);
+			}else {
+				switch(binSub) {
+				case("1111"):
+					hexReturn = hexReturn + "F";
+					break;
+				case("1110"):
+					hexReturn = hexReturn + "E";
+					break;
+				case("1101"):
+					hexReturn = hexReturn + "D";
+					break;
+				case("1011"):
+					hexReturn = hexReturn + "C";
+					break;
+				case("0111"):
+					hexReturn = hexReturn + "B";
+					break;
+				case("0110"):
+					hexReturn = hexReturn + "A";
+					break;
+				}
+			}
 		}
-    	return "-";
+    	return hexReturn;
     }
     
     String binaryToDec(String binaryStr) {
-        return "-";
+    	return "" + Integer.parseInt(binaryStr, 2);
     }
 
     /*
      * ASCII values are exactly 8 bits so return '-' if there isn't.
      */
     String binaryToAscii(String binaryStr) {
-        if (binaryStr.length() != 8) {
+        String retAscii = "";
+    	if (binaryStr.length()<=8) {
             return "-";
         }
-
-        return "-";
+    	for (int i = 0; i < binaryStr.length(); i+=8) {
+			retAscii = retAscii + (char)Integer.parseInt(retAscii.substring(i, i+7));
+		}
+        return retAscii;
     }
     
     public static void main(String[] args) {
