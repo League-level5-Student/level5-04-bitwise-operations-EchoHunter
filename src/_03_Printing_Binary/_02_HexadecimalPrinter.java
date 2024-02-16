@@ -94,11 +94,11 @@ public class _02_HexadecimalPrinter implements ActionListener {
      */
     String binaryToAscii(String binaryStr) {
         String retAscii = "";
-    	if (binaryStr.length()<=8) {
+    	if (binaryStr.length() % 8 == 0 && binaryStr.length()<8) {
             return "-";
         }
     	for (int i = 0; i < binaryStr.length(); i+=8) {
-			retAscii = retAscii + (char)Integer.parseInt(retAscii.substring(i, i+7));
+			retAscii = retAscii + (char)Integer.parseInt(binaryStr.substring(i, i+7));
 		}
         return retAscii;
     }
