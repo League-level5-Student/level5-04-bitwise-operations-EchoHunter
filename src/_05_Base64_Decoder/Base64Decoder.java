@@ -1,5 +1,8 @@
 package _05_Base64_Decoder;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * Base 64 is a way of encoding binary data using text.
  * Each number 0-63 is mapped to a character.
@@ -52,18 +55,29 @@ public class Base64Decoder {
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
     };
+    static Map<Character,Integer> base64CharsMap;
+    static {
+    	base64CharsMap = new HashMap<>();
+    	for(int i = 0; i < base64Chars.length; i++) {
+    		base64CharsMap.put(base64Chars[i], i);
+    	}
+    }
 
     //1. Complete this method so that it returns the index in
     //   the base64Chars array that corresponds to the passed in char.
     public static byte convertBase64Char(char c){
-        return 0;
+    	int charNum = base64CharsMap.get(c);
+    	return (byte)charNum;
     }
 
     //2. Complete this method so that it will take in a string that is 4
     //   characters long and return an array of 3 bytes (24 bits). The byte
     //   array should be the binary value of the encoded characters.
     public static byte[] convert4CharsTo24Bits(String s){
-        return null;
+        byte[] b = new byte[3];
+        b[0] = (byte) (convertBase64Char(s.charAt(0)) | (convertBase64Char(s.charAt(1)) <<6));
+    	b[1] = (byte) ((convertBase64Char(s.charAt(1)) >>2) | (convertBase64Char(s.charAt(2)) <<8));
+    	return b;
     }
 
     //3. Complete this method so that it takes in a string of any length

@@ -51,7 +51,7 @@ public class Base64DecoderTester {
     public void testBase64StringToByteArray() {
         String file = "";
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/_04_Base64_Decoder/base64_data.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/_05_Base64_Decoder/base64_data.txt"));
             String line = br.readLine();
             while (line != null) {
                 file += line;
@@ -66,7 +66,7 @@ public class Base64DecoderTester {
 
         byte[] bits = Base64Decoder.base64StringToByteArray(file);
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/_04_Base64_Decoder/decoded_string.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/_05_Base64_Decoder/decoded_string.txt"));
             String line = br.readLine();
             int ctr = 0;
             while (line != null) {
