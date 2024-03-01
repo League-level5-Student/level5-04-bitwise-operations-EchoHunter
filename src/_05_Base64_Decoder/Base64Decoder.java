@@ -1,6 +1,7 @@
 package _05_Base64_Decoder;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /*
@@ -75,14 +76,27 @@ public class Base64Decoder {
     //   array should be the binary value of the encoded characters.
     public static byte[] convert4CharsTo24Bits(String s){
         byte[] b = new byte[3];
-        b[0] = (byte) (convertBase64Char(s.charAt(0)) | (convertBase64Char(s.charAt(1)) <<6));
-    	b[1] = (byte) ((convertBase64Char(s.charAt(1)) >>2) | (convertBase64Char(s.charAt(2)) <<8));
+        byte[] temp = new byte[4];
+        	for(int i =0; i<4; i++) {
+        		temp[i] = convertBase64Char(s.charAt(i));
+        	}
+        	b[0] = (byte) (temp[0]<<2 | (temp[1]>>4));
+        	b[1] = (byte) ((temp[1]<<4) | (temp[2]>>2));
+        	b[2] = (byte) ((temp[2]<<6) | (temp[3]));
     	return b;
     }
 
     //3. Complete this method so that it takes in a string of any length
     //   and returns the full byte array of the decoded base64 characters.
     public static byte[] base64StringToByteArray(String file) {
-        return null;
+        byte[] b = new byte[file.length()*3/4];
+        for (int j = 0; j < file.length(); j+=4) {
+			String convert = file.substring(j, j+4);
+			byte[] tB = convert4CharsTo24Bits(convert);
+			b[j] = tB[0];
+			b[j+1] = tB[1];
+			b[j+2] = tB[2];
+		}
+    	return b;
     }
 }
